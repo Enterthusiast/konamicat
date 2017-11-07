@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Konami Code: Showing a cat</title>
+</head>
+
+<body>
+<script>
+  var recentlyTyped = [];
+  var timeOut;
+  document.onkeydown = function(e) {
+      e = e || window.event;
+      var charCode = (typeof e.which == "number") ? e.which : e.keyCode;
+      if (charCode) {
+          recentlyTyped.push(charCode);
+          clearTimeout(timeOut);
+          timeOut = setTimeout(function() {
+            recentlyTyped = [];
+          }, 1000);
+        if(recentlyTyped.join(',') === '38,38,40,40,37,39,37,39,66,65') {
+          var catocalypse = document.createElement('div');
+          catocalypse.setAttribute('id', 'catocalypse');
+          catocalypse.setAttribute('style', 'max-width:800;max-height:600');
+          catocalypse.innerHTML = '<a href="https://thecatapi.com"><img src="https://thecatapi.com/api/images/get?format=src&type=gif&decache='+Math.random()*1000+'"></a>';
+          document.body.appendChild(catocalypse);
+  
+          setTimeout(function() {
+            catocalypse.parentNode.removeChild(catocalypse);
+          }, 3000);
+        }
+      }
+  };
+</script>
+
+</body>
+</html>
